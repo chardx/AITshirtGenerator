@@ -18,6 +18,7 @@ const Shirt = () => {
   );
 
   const stateString = JSON.stringify(snap);
+
   return (
     <group key={stateString}>
       <mesh
@@ -35,13 +36,14 @@ const Shirt = () => {
             map={fullTexture}
           />
         )}
+
         {snap.isLogoTexture && (
           <Decal
             position={[0, 0.04, 0.15]}
             rotation={[0, 0, 0]}
             scale={0.15}
             map={logoTexture}
-            map-anisotropy={16}
+            anisotropy={16}
             depthTest={false}
             depthWrite={true}
           />

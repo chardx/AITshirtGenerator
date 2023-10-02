@@ -49,7 +49,9 @@ const Customizer = () => {
           />
         );
         break;
+
       default:
+        alert("Hi");
         return null;
         break;
     }
@@ -126,6 +128,14 @@ const Customizer = () => {
     });
   };
 
+  const handleActiveEditor = (tabName) => {
+    //Hides Current Active edit if clicked twice
+    if (activeEditorTab === tabName) {
+      setActiveEditorTab("");
+    } else {
+      setActiveEditorTab(tabName);
+    }
+  };
   return (
     <AnimatePresence>
       {!snap.intro && (
@@ -141,11 +151,11 @@ const Customizer = () => {
                   <Tab
                     key={tab.name}
                     tab={tab}
-                    handleClick={() => setActiveEditorTab(tab.name)}
+                    handleClick={() => handleActiveEditor(tab.name)}
                   />
                 ))}
 
-                {generateTabContent()}
+                {activeEditorTab && generateTabContent()}
               </div>
             </div>
           </motion.div>
