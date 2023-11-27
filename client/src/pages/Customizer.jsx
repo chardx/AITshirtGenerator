@@ -63,21 +63,19 @@ const Customizer = () => {
     try {
       //call our backend to generate an ai image!
       setGeneratingImg(true);
-      const response = await fetch(
-        "https://project-threejs-ai-eluc.onrender.com/api/v1/dalle",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            prompt,
-          }),
-        }
-      );
+      const serverUrl = `${import.meta.env.VITE_SERVER_URL}/api/v1/dalle`;
+      const response = await fetch(`${serverUrl}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      });
 
       const data = await response.json();
-
+      console.log(data);
       handleDecals(type, `data:image/png;base64,${data.photo}`);
     } catch (error) {
       alert(error);
